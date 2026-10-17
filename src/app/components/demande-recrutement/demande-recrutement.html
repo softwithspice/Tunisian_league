@@ -1,0 +1,40 @@
+
+<div class="recrutement">
+  <h2>Recrutement des joueurs</h2>
+  <p>Sélectionnez un joueur pour rejoindre votre équipe.</p>
+
+  <div class="joueurs">
+
+    <div class="joueur">
+      <h3>Ahmed Ben Ali</h3>
+      <p>Poste : Attaquant</p>
+      <p>Âge : 22 ans</p>
+      <button (click)="recruter('Ahmed Ben Ali')">
+        Recruter
+      </button>
+    </div>
+
+    <div class="joueur">
+      <h3>Mohamed Trabelsi</h3>
+      <p>Poste : Défenseur</p>
+      <p>Âge : 24 ans</p>
+      <button (click)="recruter('Mohamed Trabelsi')">
+        Recruter
+      </button>
+    </div>
+
+    <div class="joueur">
+      <h3>Youssef Mansouri</h3>
+      <p>Poste : Gardien</p>
+      <p>Âge : 21 ans</p>
+      <button (click)="recruter('Youssef Mansouri')">
+        Recruter
+      </button>
+    </div>
+
+  </div>
+
+  <p class="message" *ngIf="joueurRecrute">
+    {{ joueurRecrute }} a été sélectionné !
+  </p>
+</div>

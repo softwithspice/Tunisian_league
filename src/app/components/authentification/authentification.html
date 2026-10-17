@@ -1,0 +1,40 @@
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="logo">
+      <img class="logo-icon" src="TunisianLeague Pitch.png">
+      <h1>Bienvenue !</h1>
+      <p>Connectez-vous à votre compte</p>
+    </div>
+
+    <form (ngSubmit)="seConnecter(emailInput.value, passwordInput.value)">
+
+      <input
+        #emailInput
+        type="email"
+        placeholder="Adresse e-mail"
+        required
+      />
+
+      <input
+        #passwordInput
+        type="password"
+        placeholder="Mot de passe"
+        required
+      />
+
+      @if (errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <button type="submit">Se connecter</button>
+
+    </form>
+
+    <p class="footer-text">
+      © 2026 — Tous droits réservés
+    </p>
+
+  </div>
+</div>

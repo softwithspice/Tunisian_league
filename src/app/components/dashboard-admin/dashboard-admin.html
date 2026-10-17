@@ -1,0 +1,98 @@
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <h2>⚽ TunisianLeague</h2>
+    <p class="subtitle">Espace administrateur</p>
+
+    <nav>
+      <a routerLink="/admin"
+         [routerLinkActiveOptions]="{ exact: true }"
+         routerLinkActive="active">
+        🏠 Accueil
+      </a>
+
+      <a routerLink="/admin/clubs" routerLinkActive="active">
+        🛡️ Clubs
+      </a>
+
+      <a routerLink="/admin/responsables" routerLinkActive="active">
+        👥 Responsables
+      </a>
+
+      <a routerLink="/admin/championnats" routerLinkActive="active">
+        🏆 Championnats
+      </a>
+
+      <a routerLink="/admin/joueurs" routerLinkActive="active">
+        ⚽ Joueurs
+      </a>
+
+      <a routerLink="/admin/sanctions" routerLinkActive="active">
+        ⚖️ Sanctions
+      </a>
+    </nav>
+
+    <button class="logout" (click)="deconnexion()">
+      ↪ Se déconnecter
+    </button>
+  </aside>
+
+  <main class="main-content">
+
+    <header class="topbar">
+      <div>
+        <h1>Administration</h1>
+        <p>Gestion du football tunisien</p>
+      </div>
+      <span class="admin-badge">Administrateur</span>
+    </header>
+
+    @if (pageAccueil) {
+      <section class="stats-section">
+        <h2>Bienvenue, Administrateur !</h2>
+        <p class="intro">Vue d'ensemble de TunisianLeague</p>
+
+        <div class="stats">
+          <div class="stat-card blue">
+            <span>Clubs</span>
+            <strong>—</strong>
+          </div>
+
+          <div class="stat-card purple">
+            <span>Responsables</span>
+            <strong>—</strong>
+          </div>
+
+          <div class="stat-card green">
+            <span>Championnats</span>
+            <strong>—</strong>
+          </div>
+
+          <div class="stat-card orange">
+            <span>Joueurs</span>
+            <strong>—</strong>
+          </div>
+
+          <div class="stat-card red">
+            <span>Sanctions</span>
+            <strong>—</strong>
+          </div>
+        </div>
+
+        <div class="welcome-panel">
+          <h3>Votre espace de gestion ⚽</h3>
+          <p>
+            Sélectionnez une rubrique dans le menu pour gérer
+            les clubs, les joueurs, les championnats et les sanctions.
+          </p>
+        </div>
+      </section>
+    }
+
+    <section class="page-content">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+</div>

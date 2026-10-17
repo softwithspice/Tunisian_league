@@ -1,0 +1,52 @@
+
+.recrutement {
+  padding: 25px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  color: #1d5632;
+}
+
+.joueurs {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.joueur {
+  width: 220px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px #00000010;
+}
+
+.joueur h3 {
+  color: #234c31;
+}
+
+.joueur p {
+  color: #555;
+}
+
+button {
+  background-color: #278447;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d6334;
+}
+
+.message {
+  margin-top: 20px;
+  color: #278447;
+  font-weight: bold;
+}

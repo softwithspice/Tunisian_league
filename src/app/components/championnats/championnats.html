@@ -1,0 +1,78 @@
+<div class="form-page">
+
+  <button class="back-button" type="button" (click)="retour()">
+    ← Retour
+  </button>
+
+  <div class="form-card">
+    <h2>Ajouter un championnat</h2>
+    <p>Renseignez le championnat et choisissez les clubs participants.</p>
+
+    <form (ngSubmit)="enregistrerChampionnat()">
+
+      <div class="row">
+        <div class="col">
+          <label for="nom">Nom du championnat</label>
+          <input id="nom" name="nom" type="text" [(ngModel)]="championnat.nom"
+                 placeholder="Ex : Ligue 1" required />
+        </div>
+        <div class="col">
+          <label for="saison">Saison</label>
+          <input id="saison" name="saison" type="text" [(ngModel)]="championnat.saison"
+                 placeholder="Ex : 2026-2027" required />
+        </div>
+      </div>
+
+      <label>Clubs participants ({{ championnat.clubIds.length }} sélectionné(s))</label>
+      <div class="checks">
+        @for (c of data.clubs; track c.id) {
+          <label class="check">
+            <input type="checkbox" [checked]="championnat.clubIds.includes(c.id)"
+                   (change)="basculer(c.id)" />
+            {{ c.nom }}
+          </label>
+        }
+      </div>
+
+      @if (message) {
+        <p class="message">{{ message }}</p>
+      }
+
+      <div class="actions">
+        <button class="cancel" type="button" (click)="retour()">Annuler</button>
+        <button class="submit" type="submit">Enregistrer le championnat</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="list-card">
+    <h3>Championnats existants ({{ data.championnats.length }})</h3>
+
+    @if (data.championnats.length) {
+      <table>
+        <thead>
+          <tr>
+            <th>Championnat</th>
+            <th>Saison</th>
+            <th>Clubs</th>
+            <th>Participants</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of data.championnats; track c.id) {
+            <tr>
+              <td>{{ c.nom }}</td>
+              <td>{{ c.saison }}</td>
+              <td>{{ c.clubIds.length }}</td>
+              <td>{{ noms(c.clubIds) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="vide">Aucun championnat pour le moment.</p>
+    }
+  </div>
+
+</div>

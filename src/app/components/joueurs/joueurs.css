@@ -1,0 +1,187 @@
+
+.form-page {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.back-button {
+  margin-bottom: 20px;
+  border: none;
+  background: transparent;
+  color: #4f46e5;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.form-card {
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: white;
+}
+
+.form-card h2 {
+  margin-bottom: 10px;
+  font-size: 23px;
+}
+
+.form-card > p {
+  margin-bottom: 25px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 15px 0 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input {
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.actions button {
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.cancel {
+  border: 1px solid #cbd5e1;
+  background: white;
+}
+
+.submit {
+  border: none;
+  background: #4f46e5;
+  color: white;
+}
+
+.message {
+  margin-top: 15px;
+  color: #4338ca;
+  font-size: 13px;
+}
+select,
+textarea {
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  padding: 0;
+  width: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.facultatif {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.radios {
+  display: flex;
+  gap: 20px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.list-card {
+  margin-top: 25px;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: white;
+}
+
+.list-card h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.vide {
+  color: #64748b;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

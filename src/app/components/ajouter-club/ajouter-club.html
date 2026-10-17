@@ -1,0 +1,76 @@
+<div class="form-page">
+
+  <button class="back-button" type="button" (click)="retour()">
+    ← Retour
+  </button>
+
+  <div class="form-card">
+    <h2>Ajouter un club</h2>
+    <p>Renseignez les informations du nouveau club.</p>
+
+    <form (ngSubmit)="enregistrerClub()">
+
+      <label for="nom">Nom du club</label>
+      <input id="nom" name="nom" type="text" [(ngModel)]="club.nom"
+             placeholder="Ex : Espérance Sportive de Tunis" required />
+
+      <label for="ville">Ville</label>
+      <input id="ville" name="ville" type="text" [(ngModel)]="club.ville"
+             placeholder="Ex : Tunis" required />
+
+      <div class="row">
+        <div class="col">
+          <label for="stade">Stade <span class="facultatif">(facultatif)</span></label>
+          <input id="stade" name="stade" type="text" [(ngModel)]="club.stade"
+                 placeholder="Ex : Stade de Radès" />
+        </div>
+        <div class="col">
+          <label for="dateCreation">Date de création <span class="facultatif">(facultatif)</span></label>
+          <input id="dateCreation" name="dateCreation" type="date" [(ngModel)]="club.dateCreation" />
+        </div>
+      </div>
+
+      @if (message) {
+        <p class="message">{{ message }}</p>
+      }
+
+      <div class="actions">
+        <button class="cancel" type="button" (click)="retour()">Annuler</button>
+        <button class="submit" type="submit">Enregistrer le club</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="list-card">
+    <h3>Clubs existants ({{ data.clubs.length }})</h3>
+
+    @if (data.clubs.length) {
+      <table>
+        <thead>
+          <tr>
+            <th>Club</th>
+            <th>Ville</th>
+            <th>Stade</th>
+            <th>Création</th>
+            <th>Effectif</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of data.clubs; track c.id) {
+            <tr>
+              <td>{{ c.nom }}</td>
+              <td>{{ c.ville }}</td>
+              <td>{{ c.stade || '—' }}</td>
+              <td>{{ c.dateCreation || '—' }}</td>
+              <td>{{ data.effectif(c.id) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="vide">Aucun club pour le moment.</p>
+    }
+  </div>
+
+</div>

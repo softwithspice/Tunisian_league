@@ -1,0 +1,139 @@
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff, #f5f3ff);
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 35px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(79, 70, 229, 0.12);
+  box-sizing: border-box;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-size: 30px;
+  box-shadow: 0 5px 15px rgba(79, 70, 229, 0.25);
+}
+
+.logo h1 {
+  margin: 0 0 10px;
+  color: #1e1b4b;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.logo p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Formulaire */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+form input {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input::placeholder {
+  color: #9ca3af;
+}
+
+form input:focus {
+  border-color: #46e549;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+form p {
+  margin: -5px 0 0;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+form button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #46e549, #2ca83f);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(79, 70, 229, 0.25);
+}
+
+form button:active {
+  transform: translateY(0);
+}
+
+.footer-text {
+  margin: 30px 0 0;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 30px 22px;
+  }
+
+  .logo h1 {
+    font-size: 24px;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0;
+  text-align: center;
+}

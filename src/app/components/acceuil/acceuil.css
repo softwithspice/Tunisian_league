@@ -1,0 +1,76 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+}
+
+
+
+.login-link {
+  padding: 11px 22px;
+  border: 1px solid  #2ca83f;
+  border-radius: 8px;
+  color:  #2ca83f;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-link:hover {
+  background: #2ca83f;
+  color: white;
+}
+footer {
+  padding: 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 12px;
+  position: absolute;
+  bottom: 0px;
+
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 15px 8%;
+  background: white;
+  gap: 10px;
+}
+
+.navbar img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #2ca83f;
+  text-decoration: none;
+  margin-right: auto;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 20px;
+  }
+
+  
+}
+.navbar img {
+  width: 100px;
+  height: 60px;
+  border-radius: 80px;
+  object-fit: contain;
+  margin-right: 10px;
+}

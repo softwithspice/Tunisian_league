@@ -1,0 +1,46 @@
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <h2>⚽ TunisianLeague</h2>
+    <p class="subtitle">Espace Responsable du Club</p>
+
+    <nav>
+      <a routerLink="/responsable"
+        
+         routerLinkActive="active">
+        🏠 Accueil
+      </a>
+
+    
+
+      <a routerLink="/responsable/recrutement" routerLinkActive="active">
+        👥 Demander un recrutement
+      </a>
+
+    
+    </nav>
+
+    <button class="logout" (click)="deconnexion()">
+      ↪ Se déconnecter
+    </button>
+  </aside>
+
+  <main class="main-content">
+
+    <header class="topbar">
+      <div>
+        <h1>Responsable du Club</h1>
+        <p>Gestion du football tunisien</p>
+      </div>
+      <span class="admin-badge">Responsable du Club</span>
+    </header>
+
+   
+
+    <section class="page-content">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+</div>
