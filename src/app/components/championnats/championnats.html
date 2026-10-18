@@ -6,7 +6,7 @@
 
   <div class="form-card">
     <h2>Ajouter un championnat</h2>
-    <p>Renseignez le championnat et choisissez les clubs participants.</p>
+    <p>Renseignez les informations du nouveau championnat.</p>
 
     <form (ngSubmit)="enregistrerChampionnat()">
 
@@ -23,16 +23,20 @@
         </div>
       </div>
 
-      <label>Clubs participants ({{ championnat.clubIds.length }} sélectionné(s))</label>
-      <div class="checks">
-        @for (c of data.clubs; track c.id) {
-          <label class="check">
-            <input type="checkbox" [checked]="championnat.clubIds.includes(c.id)"
-                   (change)="basculer(c.id)" />
-            {{ c.nom }}
-          </label>
-        }
-      </div>
+   <label>Clubs participants ({{ clubIds.length }} sélectionné(s))</label>
+
+@if (clubs.length) {
+  <div class="checks">
+    @for (c of clubs; track c.id) {
+      <label class="check">
+        <input type="checkbox" [checked]="clubIds.includes(c.id!)" (change)="basculer(c.id!)" />
+        {{ c.nom }} <span class="facultatif">— {{ c.ville }}</span>
+      </label>
+    }
+  </div>
+} @else {
+  <p class="vide">Aucun club trouvé. Ajoutez d'abord des clubs.</p>
+}
 
       @if (message) {
         <p class="message">{{ message }}</p>
@@ -44,35 +48,6 @@
       </div>
 
     </form>
-  </div>
-
-  <div class="list-card">
-    <h3>Championnats existants ({{ data.championnats.length }})</h3>
-
-    @if (data.championnats.length) {
-      <table>
-        <thead>
-          <tr>
-            <th>Championnat</th>
-            <th>Saison</th>
-            <th>Clubs</th>
-            <th>Participants</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (c of data.championnats; track c.id) {
-            <tr>
-              <td>{{ c.nom }}</td>
-              <td>{{ c.saison }}</td>
-              <td>{{ c.clubIds.length }}</td>
-              <td>{{ noms(c.clubIds) }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    } @else {
-      <p class="vide">Aucun championnat pour le moment.</p>
-    }
   </div>
 
 </div>

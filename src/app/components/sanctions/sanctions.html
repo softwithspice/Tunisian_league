@@ -24,20 +24,22 @@
         </label>
       </div>
 
-      <label for="cibleId">{{ sanction.cible === 'JOUEUR' ? 'Joueur' : 'Club' }}</label>
-      <select id="cibleId" name="cibleId" [(ngModel)]="sanction.cibleId">
-        <option [ngValue]="null">— Choisir —</option>
-        @if (sanction.cible === 'JOUEUR') {
-          @for (j of data.joueurs; track j.id) {
-            <option [ngValue]="j.id">{{ j.prenom }} {{ j.nom }}</option>
-          }
-        } @else {
-          @for (c of data.clubs; track c.id) {
-            <option [ngValue]="c.id">{{ c.nom }}</option>
-          }
-        }
-      </select>
+      
 
+ <label for="cibleId">{{ sanction.cible === 'JOUEUR' ? 'Joueur' : 'Club' }}</label>
+<select id="cibleId" name="cibleId" [(ngModel)]="sanction.cibleId">
+  <option [ngValue]="null">— Choisir —</option>
+
+  @if (sanction.cible === 'JOUEUR') {
+    @for (j of joueurs; track j.id) {
+      <option [ngValue]="j.id">{{ j.prenom }} {{ j.nom }}</option>
+    }
+  } @else {
+    @for (c of clubs; track c.id) {
+      <option [ngValue]="c.id">{{ c.nom }} — {{ c.ville }}</option>
+    }
+  }
+</select>
       <div class="row">
         <div class="col">
           <label for="type">Type de sanction</label>
@@ -70,37 +72,6 @@
       </div>
 
     </form>
-  </div>
-
-  <div class="list-card">
-    <h3>Sanctions existantes ({{ data.sanctions.length }})</h3>
-
-    @if (data.sanctions.length) {
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Concerne</th>
-            <th>Motif</th>
-            <th>Durée</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (s of data.sanctions; track s.id) {
-            <tr>
-              <td>{{ s.date }}</td>
-              <td>{{ s.type }}</td>
-              <td>{{ cible(s.joueurId, s.clubId) }}</td>
-              <td>{{ s.motif }}</td>
-              <td>{{ s.duree || '—' }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    } @else {
-      <p class="vide">Aucune sanction pour le moment.</p>
-    }
   </div>
 
 </div>
