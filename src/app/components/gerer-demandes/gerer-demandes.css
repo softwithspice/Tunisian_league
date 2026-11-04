@@ -1,0 +1,86 @@
+.page-admin {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: white;
+}
+
+.page-admin h2 {
+  margin-bottom: 8px;
+  font-size: 23px;
+}
+
+.sous-titre {
+  margin-bottom: 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge.attente { background: #fef3c7; color: #92400e; }
+.badge.acceptee { background: #dcfce7; color: #166534; }
+.badge.refusee { background: #fee2e2; color: #991b1b; }
+
+button {
+  margin-right: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-accepter { background: #16a34a; }
+.btn-refuser { background: #dc2626; }
+
+.traitee,
+.vide {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.message {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.message.succes { color: #16a34a; }
+.message.erreur { color: #dc2626; }

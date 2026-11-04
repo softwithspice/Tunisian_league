@@ -1,40 +1,73 @@
-
 <div class="recrutement">
   <h2>Recrutement des joueurs</h2>
   <p>Sélectionnez un joueur pour rejoindre votre équipe.</p>
 
+  @if (chargement()) {
+    <p>Chargement...</p>
+  }
+
+  @if (erreur()) {
+    <p class="erreur">{{ erreur() }}</p>
+  }
+
   <div class="joueurs">
-
-    <div class="joueur">
-      <h3>Ahmed Ben Ali</h3>
-      <p>Poste : Attaquant</p>
-      <p>Âge : 22 ans</p>
-      <button (click)="recruter('Ahmed Ben Ali')">
-        Recruter
-      </button>
-    </div>
-
-    <div class="joueur">
-      <h3>Mohamed Trabelsi</h3>
-      <p>Poste : Défenseur</p>
-      <p>Âge : 24 ans</p>
-      <button (click)="recruter('Mohamed Trabelsi')">
-        Recruter
-      </button>
-    </div>
-
-    <div class="joueur">
-      <h3>Youssef Mansouri</h3>
-      <p>Poste : Gardien</p>
-      <p>Âge : 21 ans</p>
-      <button (click)="recruter('Youssef Mansouri')">
-        Recruter
-      </button>
-    </div>
-
+    @for (joueur of joueurs(); track joueur.id) {
+      <div class="joueur">
+        <h3>{{ joueur.nom }}</h3>
+        <p>Poste : {{ joueur.poste }}</p>
+     <p>Âge : {{ calculerAge(joueur.dateNaissance) }} ans</p>
+        <button (click)="recruter(joueur)">Recruter</button>
+      </div>
+    }
   </div>
 
-  <p class="message" *ngIf="joueurRecrute">
-    {{ joueurRecrute }} a été sélectionné !
-  </p>
+  @if (joueurRecrute()) {
+    <p class="message">
+      Demande de recrutement envoyée pour {{ joueurRecrute() }} !
+    </p>
+  }
 </div>
+  <hr class="separateur" />
+
+  <div class="mes-demandes">
+    <div class="entete">
+      <h3>Mes demandes</h3>
+      <button type="button" class="actualiser" (click)="chargerMesDemandes()">Actualiser</button>
+    </div>
+
+    @if (mesDemandes().length === 0) {
+      <p class="vide">Aucune demande envoyée pour le moment.</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Joueur</th>
+            <th>Réponse</th>
+            <th>Traitée le</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (d of mesDemandes(); track d.id) {
+            <tr>
+              <td>{{ d.dateDemande }}</td>
+              <td>{{ d.nomJoueur }}</td>
+              <td>
+                <span class="badge"
+                      [class.attente]="d.statuDemande === 'EN_ATTENTE'"
+                      [class.acceptee]="d.statuDemande === 'ACCEPTEE'"
+                      [class.refusee]="d.statuDemande === 'REFUSEE'">
+                  @switch (d.statuDemande) {
+                    @case ('EN_ATTENTE') { En attente }
+                    @case ('ACCEPTEE') { Acceptée ✅ }
+                    @default { Refusée ❌ }
+                  }
+                </span>
+              </td>
+              <td>{{ d.dateTraitement || '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>

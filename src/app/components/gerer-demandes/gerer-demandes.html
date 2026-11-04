@@ -1,0 +1,64 @@
+<div class="page-admin">
+  <h2>Demandes de recrutement</h2>
+  <p class="sous-titre">Acceptez ou refusez les demandes envoyées par les responsables de club.</p>
+
+  @if (message()) {
+    <p class="message succes">{{ message() }}</p>
+  }
+  @if (erreur()) {
+    <p class="message erreur">{{ erreur() }}</p>
+  }
+
+  @if (chargement()) {
+    <p>Chargement...</p>
+  } @else if (demandes().length === 0) {
+    <p class="vide">Aucune demande pour le moment.</p>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Club demandeur</th>
+            <th>Joueur</th>
+            <th>Club actuel du joueur</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (d of demandes(); track d.id) {
+            <tr>
+              <td>{{ d.dateDemande }}</td>
+              <td>{{ d.nomClubDemandeur }}</td>
+              <td>{{ d.nomJoueur }}</td>
+              <td>{{ d.clubActuelJoueur || 'Aucun club pour le moment' }}</td>
+              <td>
+                <span class="badge"
+                      [class.attente]="d.statuDemande === 'EN_ATTENTE'"
+                      [class.acceptee]="d.statuDemande === 'ACCEPTEE'"
+                      [class.refusee]="d.statuDemande === 'REFUSEE'">
+                  @switch (d.statuDemande) {
+                    @case ('EN_ATTENTE') { En attente }
+                    @case ('ACCEPTEE') { Acceptée }
+                    @default { Refusée }
+                  }
+                </span>
+              </td>
+              <td>
+                @if (d.statuDemande === 'EN_ATTENTE') {
+                  <button class="btn-accepter" type="button"
+                          (click)="accepter(d)" [disabled]="enCours() === d.id">Accepter</button>
+                  <button class="btn-refuser" type="button"
+                          (click)="refuser(d)" [disabled]="enCours() === d.id">Refuser</button>
+                } @else {
+                  <span class="traitee">Traitée</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

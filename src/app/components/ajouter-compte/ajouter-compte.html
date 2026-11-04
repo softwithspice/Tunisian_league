@@ -6,7 +6,7 @@
 
   <div class="form-card">
     <h2>Ajouter un compte</h2>
-    <p>Créez le compte du responsable de club et associez-le à son club.</p>
+    <p>Créez le compte du responsable, affectez-lui son club et donnez-lui un mot de passe provisoire.</p>
 
     <form (ngSubmit)="enregistrerResponsable()">
 
@@ -38,32 +38,30 @@
 
       <div class="row">
         <div class="col">
-          <label for="clubId">Club géré</label>
+          <label for="clubId">Club affecté</label>
           <select id="clubId" name="clubId" [(ngModel)]="responsable.clubId">
             <option [ngValue]="null">— Choisir un club —</option>
-            @for (c of clubsLibres(); track c.id) {
-              <option [ngValue]="c.id">{{ c.nom }}</option>
+            @for (c of clubs; track c.id) {
+              <option [ngValue]="c.id">{{ c.nom }} — {{ c.ville }}</option>
             }
           </select>
         </div>
-        <div class="col">
-          <label for="motDePasse">Mot de passe provisoire</label>
-          <input id="motDePasse" name="motDePasse" type="password"
-                 [(ngModel)]="responsable.motDePasse" autocomplete="new-password" required />
-        </div>
+    <div class="actions">
+        <button class="cancel" type="button" (click)="retour()">Annuler</button>
+        <button class="submit" type="submit">Créer le compte</button>
+      </div>
       </div>
 
       @if (message) {
         <p class="message">{{ message }}</p>
       }
 
-      <div class="actions">
-        <button class="cancel" type="button" (click)="retour()">Annuler</button>
-        <button class="submit" type="submit">Créer le compte</button>
-      </div>
+    
 
     </form>
   </div>
+
+</div>
 
   <!-- <div class="list-card">
     <h3>Comptes existants ({{ data.responsables.length }})</h3>
@@ -94,4 +92,3 @@
     }
   </div> -->
 
-</div>

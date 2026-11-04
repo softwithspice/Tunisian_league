@@ -11,6 +11,7 @@ import { Championnats } from './components/championnats/championnats';
 import { Joueurs } from './components/joueurs/joueurs';
 import { Sanctions } from './components/sanctions/sanctions';
 import { DemandeRecrutement } from './components/demande-recrutement/demande-recrutement';
+import { GererDemandes } from './components/gerer-demandes/gerer-demandes';
 
 
 export const routes: Routes = [
@@ -39,6 +40,10 @@ export const routes: Routes = [
     path: 'sanctions',
     component:Sanctions
   },
+  {
+    path:'Gerer_demandes',
+    component:GererDemandes
+  }
 
   
 ]},
