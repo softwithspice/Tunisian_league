@@ -12,11 +12,17 @@ import { Joueurs } from './components/joueurs/joueurs';
 import { Sanctions } from './components/sanctions/sanctions';
 import { DemandeRecrutement } from './components/demande-recrutement/demande-recrutement';
 import { GererDemandes } from './components/gerer-demandes/gerer-demandes';
+import { ClubJoueurs } from './components/club-joueurs/club-joueurs';
+import { MesSanctions } from './components/mes-sanctions/mes-sanctions';
 
 
 export const routes: Routes = [
     {
         path:"",component:Acceuil
+    },
+
+    {
+        path: 'clubs/:clubId/joueurs', title: 'Joueurs du club', component: ClubJoueurs
     },
 
 { path: 'admin', component: DashboardAdmin ,children:[
@@ -51,6 +57,10 @@ export const routes: Routes = [
     {
     path: 'recrutement',
     component: DemandeRecrutement
+  },
+  {
+    path: 'sanctions',
+    component: MesSanctions
   },
 ]}
 ,

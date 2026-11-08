@@ -14,4 +14,8 @@ export class SanctionService {
   addSanction(sanction: SanctionInterface): Observable<SanctionInterface> {
     return this.http.post<SanctionInterface>(this.url, sanction);
   }
+
+  getMesSanctions(): Observable<SanctionInterface[]> {
+    return this.http.get<SanctionInterface[]>(`${this.url}/mes-sanctions`);
+  }
 }

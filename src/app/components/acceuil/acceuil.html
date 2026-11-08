@@ -10,7 +10,31 @@
     </a>
   </nav>
 
+  <main class="clubs-section">
+    <h1>Les clubs de la ligue</h1>
+    <p class="intro">Choisissez un club pour consulter son effectif.</p>
 
+    @if (chargement()) {
+      <p class="etat">Chargement des clubs...</p>
+    } @else if (erreur()) {
+      <p class="etat erreur">{{ erreur() }}</p>
+    } @else if (clubs().length === 0) {
+      <p class="etat">Aucun club pour le moment.</p>
+    } @else {
+      <div class="clubs">
+        @for (club of clubs(); track club.id) {
+          <a class="club-card" [routerLink]="['/clubs', club.id, 'joueurs']">
+            <h3>{{ club.nom }}</h3>
+            <p>📍 {{ club.ville }}</p>
+            @if (club.stade) {
+              <p>🏟️ {{ club.stade }}</p>
+            }
+            <span class="voir">Voir les joueurs →</span>
+          </a>
+        }
+      </div>
+    }
+  </main>
 
   <footer>
     © 2026 TunisianLeague. Tous droits réservés.

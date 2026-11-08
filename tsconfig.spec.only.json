@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec-only"
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/services/club-service.spec.ts",
+    "src/app/services/sanction-service.spec.ts",
+    "src/app/components/club-joueurs/club-joueurs.spec.ts",
+    "src/app/components/mes-sanctions/mes-sanctions.spec.ts"
+  ]
+}
