@@ -1,0 +1,129 @@
+.change-password-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff, #f5f3ff);
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Card */
+.change-password-container h2,
+.change-password-container > p,
+.change-password-container form {
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+}
+
+.change-password-container h2 {
+  margin: 0;
+  padding: 40px 35px 10px;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  color: #1e1b4b;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.change-password-container > p {
+  margin: 0;
+  padding: 10px 35px 25px;
+  background: white;
+  color: #6b7280;
+  font-size: 14px;
+  text-align: center;
+}
+
+.change-password-container form {
+  padding: 10px 35px 40px;
+  background: white;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 40px rgba(79, 70, 229, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Labels */
+.change-password-container label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Inputs */
+.change-password-container input {
+  width: 100%;
+  padding: 15px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.change-password-container input::placeholder {
+  color: #9ca3af;
+}
+
+.change-password-container input:focus {
+  border-color: #46e549;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+/* Button */
+.change-password-container button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #46e549, #2ca83f);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.change-password-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(79, 70, 229, 0.25);
+}
+
+.change-password-container button:active {
+  transform: translateY(0);
+}
+
+/* Error message */
+.change-password-container .error {
+  margin: -5px 0 0;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .change-password-container h2 {
+    padding: 30px 22px 10px;
+    font-size: 24px;
+  }
+
+  .change-password-container > p {
+    padding: 10px 22px 25px;
+  }
+
+  .change-password-container form {
+    padding: 10px 22px 30px;
+  }
+}

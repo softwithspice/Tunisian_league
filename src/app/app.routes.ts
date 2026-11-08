@@ -12,6 +12,8 @@ import { Joueurs } from './components/joueurs/joueurs';
 import { Sanctions } from './components/sanctions/sanctions';
 import { DemandeRecrutement } from './components/demande-recrutement/demande-recrutement';
 import { GererDemandes } from './components/gerer-demandes/gerer-demandes';
+import { ChangerMotDePasse } from './components/changer-mot-de-passe/changer-mot-de-passe';
+import { AfficherJoueurs } from './components/afficher-joueurs/afficher-joueurs';
 
 
 export const routes: Routes = [
@@ -52,7 +54,16 @@ export const routes: Routes = [
     path: 'recrutement',
     component: DemandeRecrutement
   },
-]}
+  {
+  path: 'mon-effectif',
+  component: AfficherJoueurs
+},
+]},
+
+{
+  path: 'changer-mot-de-passe',
+  component: ChangerMotDePasse
+}
 ,
  
     {

@@ -1,24 +1,25 @@
-
 <div class="dashboard">
 
   <aside class="sidebar">
     <h2>⚽ TunisianLeague</h2>
-    <p class="subtitle">Espace Responsable du Club</p>
+    <p class="subtitle">{{nomClub()}}</p>
 
     <nav>
-      <a routerLink="/responsable"
-        
-         routerLinkActive="active">
+      <a routerLink="/responsable" routerLinkActive="active">
         🏠 Accueil
       </a>
 
-    
+
 
       <a routerLink="/responsable/recrutement" routerLinkActive="active">
         👥 Demander un recrutement
       </a>
 
-    
+      <a routerLink="/responsable/mon-effectif" routerLinkActive="active">
+        ⚽ Mon effectif
+      </a>
+
+
     </nav>
 
     <button class="logout" (click)="deconnexion()">
@@ -33,10 +34,10 @@
         <h1>Responsable du Club</h1>
         <p>Gestion du football tunisien</p>
       </div>
-      <span class="admin-badge">Responsable du Club</span>
+      <span class="admin-badge">{{nomClub()}}</span>
     </header>
 
-   
+
 
     <section class="page-content">
       <router-outlet></router-outlet>

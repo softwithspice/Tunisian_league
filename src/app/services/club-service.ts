@@ -18,4 +18,9 @@ export class ClubService {
   getClubs(): Observable<ClubInterface[]> {
     return this.http.get<ClubInterface[]>(this.url);
   }
+  getMonClub(): Observable<{ nom: string }> {
+  return this.http.get<{ nom: string }>(
+    `${this.url}/mon-club`
+  );
+}
 }

@@ -11,7 +11,6 @@ import { DemandeRecrutementInterface } from '../../interfaces/Demande_recrutemen
 export class DemandeRecrutement implements OnInit {
   private recrutementService = inject(RecrutementService);
 
-  private readonly responsableId = 1;
 
   joueurs = signal<JoueurInterface[]>([]);
   mesDemandes = signal<DemandeRecrutementInterface[]>([]);
@@ -35,7 +34,7 @@ export class DemandeRecrutement implements OnInit {
   }
 
   chargerMesDemandes(): void {
-    this.recrutementService.getMesDemandes(this.responsableId).subscribe({
+   this.recrutementService.getMesDemandes().subscribe({
       next: (data) => this.mesDemandes.set(data),
       error: () => this.erreur.set('Impossible de charger vos demandes.'),
     });
@@ -50,24 +49,22 @@ export class DemandeRecrutement implements OnInit {
     this.erreur.set('');
     this.joueurRecrute.set('');
 
-    const demande: DemandeRecrutementInterface = {
-      joueurId: joueur.id,
-      responsableId: this.responsableId,
-      dateDemande: new Date().toISOString().slice(0, 10),
-      statuDemande: 'EN_ATTENTE',
-    };
+  this.recrutementService.envoyerDemande(joueur.id).subscribe({
+  next: () => {
+    this.joueurRecrute.set(joueur.nom);
+    this.chargerMesDemandes();
+  },
+  error: (err) => {
+    console.log('Erreur recrutement :', err);
+    console.log('Réponse serveur :', err.error);
 
-    this.recrutementService.envoyerDemande(demande).subscribe({
-      next: () => {
-        this.joueurRecrute.set(joueur.nom);
-        this.chargerMesDemandes(); // la nouvelle demande apparaît dans « Mes demandes »
-      },
-      error: (err) => {
-        console.log('Payload envoyé :', JSON.stringify(demande));
-        console.log('Réponse serveur :', err.error);
-        this.erreur.set("Échec de l'envoi de la demande.");
-      },
-    });
+    this.erreur.set(
+      err.status === 409
+        ? 'Ce joueur appartient déjà à votre club.'
+        : "Échec de l'envoi de la demande."
+    );
+  },
+});
   }
 
   calculerAge(dateNaissance: string): number {

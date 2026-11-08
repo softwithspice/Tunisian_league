@@ -22,4 +22,9 @@ export class JoueurService {
   getJoueurs(): Observable<JoueurInterface[]> {
     return this.http.get<JoueurInterface[]>(this.url);
   }
+  getMonEffectif(): Observable<JoueurInterface[]> {
+  return this.http.get<JoueurInterface[]>(
+    `${this.url}/mon-effectif`
+  );
+}
 }

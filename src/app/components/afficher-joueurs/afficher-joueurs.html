@@ -1,0 +1,71 @@
+<div class="joueurs-container">
+
+  <div class="page-header">
+    <div>
+      <h1>Mon effectif</h1>
+      <p>Consultez les joueurs de votre club.</p>
+    </div>
+
+    <div class="total-joueurs">
+      <span>{{ joueurs.length }}</span>
+      <small>Joueurs</small>
+    </div>
+  </div>
+
+  @if (chargement) {
+    <div class="message">
+      Chargement de votre effectif...
+    </div>
+  }
+
+  @if (erreur) {
+    <div class="error-message">
+      {{ erreur }}
+    </div>
+  }
+
+  @if (!chargement && !erreur) {
+
+    @if (joueurs.length > 0) {
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Date de naissance</th>
+              <th>Poste</th>
+              <th>Nationalité</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (joueur of joueurs; track joueur.id) {
+              <tr>
+                <td>{{ joueur.id }}</td>
+                <td>{{ joueur.nom }}</td>
+                <td>{{ joueur.prenom }}</td>
+                <td>{{ joueur.dateNaissance }}</td>
+                <td>
+                  <span class="poste">{{ joueur.poste }}</span>
+                </td>
+                <td>{{ joueur.nationalite }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+    } @else {
+
+      <div class="empty-state">
+        <h3>Aucun joueur trouvé</h3>
+        <p>Votre effectif ne contient actuellement aucun joueur.</p>
+      </div>
+
+    }
+  }
+
+</div>

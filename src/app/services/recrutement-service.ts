@@ -1,40 +1,57 @@
-import { Injectable ,inject} from '@angular/core';
 
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JoueurInterface } from '../interfaces/JoueursInterface';
 import { DemandeRecrutementInterface } from '../interfaces/Demande_recrutement';
 
-
 @Injectable({ providedIn: 'root' })
 export class RecrutementService {
+
   private http = inject(HttpClient);
   private readonly apiUrl = 'http://localhost:8080';
+  private readonly urlDemandes = `${this.apiUrl}/recrutement`;
 
+  // Récupérer les joueurs disponibles pour le responsable
   getJoueurs(): Observable<JoueurInterface[]> {
-    return this.http.get<JoueurInterface[]>(`${this.apiUrl}/joueurs`);
+    return this.http.get<JoueurInterface[]>(
+      `${this.apiUrl}/joueurs/disponibles`
+    );
   }
 
-  envoyerDemande(demande: DemandeRecrutementInterface): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/recrutement`, demande);
+  // Envoyer une demande : seul le joueurId est nécessaire
+  envoyerDemande(joueurId: number): Observable<void> {
+    return this.http.post<void>(
+      this.urlDemandes,
+      { joueurId }
+    );
   }
 
-private readonly urlDemandes = 'http://localhost:8080/recrutement';
+  // Toutes les demandes : ADMIN
+  getDemandes(): Observable<DemandeRecrutementInterface[]> {
+    return this.http.get<DemandeRecrutementInterface[]>(
+      this.urlDemandes
+    );
+  }
 
-getDemandes(): Observable<DemandeRecrutementInterface[]> {
-  return this.http.get<DemandeRecrutementInterface[]>(this.urlDemandes);
-}
+  // Demandes du responsable connecté
+  getMesDemandes(): Observable<DemandeRecrutementInterface[]> {
+    return this.http.get<DemandeRecrutementInterface[]>(
+      `${this.urlDemandes}/mes-demandes`
+    );
+  }
 
-accepterDemande(id: number): Observable<void> {
-  return this.http.put<void>(`${this.urlDemandes}/${id}/accepter`, {});
-}
+  // Accepter une demande : ADMIN
+  accepterDemande(id: number): Observable<void> {
+    return this.http.put<void>(
+      `${this.urlDemandes}/${id}/accepter`, {}
+    );
+  }
 
-refuserDemande(id: number): Observable<void> {
-  return this.http.put<void>(`${this.urlDemandes}/${id}/refuser`, {});
-}
-getMesDemandes(responsableId: number): Observable<DemandeRecrutementInterface[]> {
-  return this.http.get<DemandeRecrutementInterface[]>(
-    `${this.urlDemandes}/responsable/${responsableId}`,
-  );
-}
+  // Refuser une demande : ADMIN
+  refuserDemande(id: number): Observable<void> {
+    return this.http.put<void>(
+      `${this.urlDemandes}/${id}/refuser`, {}
+    );
+  }
 }

@@ -80,10 +80,13 @@ export class AjouterCompte implements OnInit {
           this.responsable = this.nouveau();
           this.cdr.markForCheck();
         },
-        error: (err) => {
-          this.message = this.texteErreur(err);
-          this.cdr.markForCheck();
-        },
+       error: (err: HttpErrorResponse) => {
+  console.log('HTTP STATUS:', err.status);
+  console.log('ERROR BODY:', err.error);
+
+  this.message = this.texteErreur(err);
+  this.cdr.markForCheck();
+}
       });
   }
 

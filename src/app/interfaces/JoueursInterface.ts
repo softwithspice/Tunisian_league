@@ -5,7 +5,7 @@ export interface JoueurInterface {
   nom: string;
   prenom: string;
   dateNaissance: string;
-  poste: String;
+  poste: string;
   nationalite: string;
   clubId?: number | null; 
 }
