@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:us14-15": "ng test --watch=false --ts-config=tsconfig.spec.only.json --include=src/app/services/club-service.spec.ts --include=src/app/services/sanction-service.spec.ts --include=src/app/components/club-joueurs/club-joueurs.spec.ts --include=src/app/components/mes-sanctions/mes-sanctions.spec.ts",
     "serve:ssr:tunisian_league": "node dist/tunisian_league/server/server.mjs"
   },
   "prettier": {
