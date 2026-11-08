@@ -34,8 +34,7 @@ footer {
   text-align: center;
   color: #94a3b8;
   font-size: 12px;
-  position: absolute;
-  bottom: 0px;
+  margin-top: auto;
 
 }
 .navbar {
@@ -73,4 +72,71 @@ footer {
   border-radius: 80px;
   object-fit: contain;
   margin-right: 10px;
+}
+
+.clubs-section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 8%;
+}
+
+.clubs-section h1 {
+  color: #173d25;
+  font-size: 28px;
+}
+
+.clubs-section .intro {
+  margin: 8px 0 28px;
+  color: #647568;
+}
+
+.etat {
+  color: #647568;
+}
+
+.etat.erreur {
+  color: #b91c1c;
+}
+
+.clubs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.club-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border: 1px solid #e0ebe1;
+  border-top: 4px solid #2ca83f;
+  border-radius: 12px;
+  background: white;
+  color: #1e293b;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.club-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px #173d2520;
+}
+
+.club-card h3 {
+  color: #173d25;
+  margin-bottom: 4px;
+}
+
+.club-card p {
+  color: #647568;
+  font-size: 14px;
+}
+
+.club-card .voir {
+  margin-top: 10px;
+  color: #2ca83f;
+  font-weight: bold;
+  font-size: 14px;
 }

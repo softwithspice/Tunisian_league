@@ -1,0 +1,49 @@
+<div class="page">
+  <nav class="navbar">
+    <img src="TunisianLeague Pitch.png">
+    <a class="logo" routerLink="/">TunisianLeague</a>
+    <a class="retour" routerLink="/">← Tous les clubs</a>
+  </nav>
+
+  <main class="contenu">
+    <header class="entete">
+      <h1>{{ club()?.nom ?? 'Effectif du club' }}</h1>
+      @if (club(); as c) {
+        <p>📍 {{ c.ville }}@if (c.stade) { · 🏟️ {{ c.stade }} }</p>
+      }
+    </header>
+
+    @if (chargement()) {
+      <p class="etat">Chargement des joueurs...</p>
+    } @else if (erreur()) {
+      <p class="etat erreur">{{ erreur() }}</p>
+    } @else if (joueurs().length === 0) {
+      <p class="etat">Aucun joueur dans ce club pour le moment.</p>
+    } @else {
+      <p class="compteur">{{ joueurs().length }} joueur(s)</p>
+
+      <div class="tableau">
+        <table>
+          <thead>
+            <tr>
+              <th>Joueur</th>
+              <th>Poste</th>
+              <th>Nationalité</th>
+              <th>Âge</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (j of joueurs(); track j.id) {
+              <tr>
+                <td class="nom">{{ j.prenom }} {{ j.nom }}</td>
+                <td><span class="poste">{{ j.poste }}</span></td>
+                <td>{{ j.nationalite }}</td>
+                <td>{{ calculerAge(j.dateNaissance) ?? '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </main>
+</div>

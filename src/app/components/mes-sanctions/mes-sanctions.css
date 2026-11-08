@@ -1,0 +1,163 @@
+.sanctions {
+  font-family: Arial, sans-serif;
+}
+
+.entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+h2 {
+  color: #1d5632;
+}
+
+.entete p {
+  margin-top: 6px;
+  color: #647568;
+  font-size: 14px;
+}
+
+.actualiser {
+  padding: 8px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+}
+
+.actualiser:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.etat {
+  color: #647568;
+}
+
+.etat.erreur {
+  color: #b91c1c;
+}
+
+.vide {
+  padding: 25px;
+  border: 1px solid #e0ebe1;
+  border-radius: 12px;
+  background: white;
+}
+
+.vide strong {
+  color: #208431;
+}
+
+.vide p {
+  margin-top: 8px;
+  color: #647568;
+  font-size: 14px;
+}
+
+.resume {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.carte {
+  padding: 18px;
+  border: 1px solid #e0ebe1;
+  border-top: 4px solid #2ca83f;
+  border-radius: 12px;
+  background: white;
+}
+
+.carte.rouge {
+  border-top-color: #ef4444;
+}
+
+.carte.orange {
+  border-top-color: #f59e0b;
+}
+
+.carte span,
+.carte strong {
+  display: block;
+}
+
+.carte span {
+  color: #475569;
+  font-size: 13px;
+}
+
+.carte strong {
+  margin-top: 10px;
+  font-size: 26px;
+}
+
+.tableau {
+  overflow-x: auto;
+  border: 1px solid #e0ebe1;
+  border-radius: 12px;
+  background: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+td.club {
+  font-weight: bold;
+  color: #173d25;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge.suspension {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge.avertissement {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+@media (max-width: 600px) {
+  .resume {
+    grid-template-columns: 1fr;
+  }
+
+  .entete {
+    flex-direction: column;
+  }
+}

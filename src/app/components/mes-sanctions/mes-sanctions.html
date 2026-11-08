@@ -1,0 +1,68 @@
+<div class="sanctions">
+  <div class="entete">
+    <div>
+      <h2>Sanctions de mon club</h2>
+      <p>Sanctions prononcées contre votre club et vos joueurs.</p>
+    </div>
+    <button type="button" class="actualiser" (click)="charger()" [disabled]="chargement()">
+      Actualiser
+    </button>
+  </div>
+
+  @if (chargement()) {
+    <p class="etat">Chargement...</p>
+  } @else if (erreur()) {
+    <p class="etat erreur">{{ erreur() }}</p>
+  } @else if (sanctions().length === 0) {
+    <div class="vide">
+      <strong>✅ Aucune sanction</strong>
+      <p>Votre club et vos joueurs n'ont reçu aucune sanction.</p>
+    </div>
+  } @else {
+    <div class="resume">
+      <div class="carte">
+        <span>Total</span>
+        <strong>{{ sanctions().length }}</strong>
+      </div>
+      <div class="carte rouge">
+        <span>Suspensions</span>
+        <strong>{{ nbSuspensions() }}</strong>
+      </div>
+      <div class="carte orange">
+        <span>Avertissements</span>
+        <strong>{{ nbAvertissements() }}</strong>
+      </div>
+    </div>
+
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Concerne</th>
+            <th>Motif</th>
+            <th>Durée</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (s of sanctions(); track s.id) {
+            <tr>
+              <td>{{ s.dateSanction }}</td>
+              <td>
+                <span class="badge"
+                      [class.suspension]="s.typeSanction === 'SUSPENSION'"
+                      [class.avertissement]="s.typeSanction === 'AVERTISSEMENT'">
+                  {{ s.typeSanction }}
+                </span>
+              </td>
+              <td [class.club]="s.idJoueur == null">{{ cible(s) }}</td>
+              <td>{{ s.motif }}</td>
+              <td>{{ s.duree ? s.duree + ' match(s)' : '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
