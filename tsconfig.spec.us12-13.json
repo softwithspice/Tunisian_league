@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "outDir": "./out-tsc/spec-us12-13" },
+  "include": ["src/**/*.d.ts", "src/app/components/journee/journee.spec.ts"]
+}
