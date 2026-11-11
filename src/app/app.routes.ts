@@ -3,24 +3,10 @@ import { AUTHENTIFICATION } from './components/authentification/authentification
 import { Acceuil } from './components/acceuil/acceuil';
 
 
-import { AjouterClub } from './components/ajouter-club/ajouter-club';
-import { AjouterCompte } from './components/ajouter-compte/ajouter-compte';
-import { DashboardResponsable } from './components/dashboard-responsable/dashboard-responsable';
-import { DashboardAdmin } from './components/dashboard-admin/dashboard-admin';
-import { Championnats } from './components/championnats/championnats';
-import { Joueurs } from './components/joueurs/joueurs';
-import { Sanctions } from './components/sanctions/sanctions';
-import { DemandeRecrutement } from './components/demande-recrutement/demande-recrutement';
-import { GererDemandes } from './components/gerer-demandes/gerer-demandes';
-
-import { ChangerMotDePasse } from './components/changer-mot-de-passe/changer-mot-de-passe';
-import { AfficherJoueurs } from './components/afficher-joueurs/afficher-joueurs';
-
 import { ClubJoueurs } from './components/club-joueurs/club-joueurs';
-import { MesSanctions } from './components/mes-sanctions/mes-sanctions';
-
-
+import { Calendrier } from './components/calendrier/calendrier';
 export const routes: Routes = [
+    { path: 'calendrier', component: Calendrier },
     {
         path:"",component:Acceuil
     },
@@ -29,53 +15,54 @@ export const routes: Routes = [
         path: 'clubs/:clubId/joueurs', title: 'Joueurs du club', component: ClubJoueurs
     },
 
-{ path: 'admin', component: DashboardAdmin ,children:[
+{ path: 'admin', loadComponent: () => import('./components/dashboard-admin/dashboard-admin').then(m => m.DashboardAdmin) ,children:[
+{ path: 'journees', loadComponent: () => import('./components/journee/journee').then(m => m.Journee) },
 {
     path: 'clubs',
-    component: AjouterClub
+    loadComponent: () => import('./components/ajouter-club/ajouter-club').then(m => m.AjouterClub)
   },
   {
     path: 'responsables',
-    component: AjouterCompte
+    loadComponent: () => import('./components/ajouter-compte/ajouter-compte').then(m => m.AjouterCompte)
   },
   {
     path: 'championnats',
-    component: Championnats
+    loadComponent: () => import('./components/championnats/championnats').then(m => m.Championnats)
   },
    {
     path: 'joueurs',
-    component:Joueurs
+    loadComponent: () => import('./components/joueurs/joueurs').then(m => m.Joueurs)
   },
    {
     path: 'sanctions',
-    component:Sanctions
+    loadComponent: () => import('./components/sanctions/sanctions').then(m => m.Sanctions)
   },
   {
     path:'Gerer_demandes',
-    component:GererDemandes
+    loadComponent: () => import('./components/gerer-demandes/gerer-demandes').then(m => m.GererDemandes)
   }
 
   
 ]},
-{ path: 'responsable', component:DashboardResponsable,children:[
+{ path: 'responsable', loadComponent: () => import('./components/dashboard-responsable/dashboard-responsable').then(m => m.DashboardResponsable),children:[
     {
     path: 'recrutement',
-    component: DemandeRecrutement
+    loadComponent: () => import('./components/demande-recrutement/demande-recrutement').then(m => m.DemandeRecrutement)
   },
   {
 
   path: 'mon-effectif',
-  component: AfficherJoueurs
+  loadComponent: () => import('./components/afficher-joueurs/afficher-joueurs').then(m => m.AfficherJoueurs)
 },
 ]},
 
 {
   path: 'changer-mot-de-passe',
-  component: ChangerMotDePasse
+  loadComponent: () => import('./components/changer-mot-de-passe/changer-mot-de-passe').then(m => m.ChangerMotDePasse)
 },
 {
     path: 'sanctions',
-    component: MesSanctions
+    loadComponent: () => import('./components/mes-sanctions/mes-sanctions').then(m => m.MesSanctions)
   }
 ,
  
