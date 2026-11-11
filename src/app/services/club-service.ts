@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../api-config';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ import { JoueurInterface } from '../interfaces/JoueursInterface';
 export class ClubService {
   private readonly http = inject(HttpClient);
 
-  private readonly url = 'http://localhost:8080/clubs';
+  private readonly url = `${API_BASE_URL}/clubs`;
 
   addClub(club: ClubInterface): Observable<ClubInterface> {
     return this.http.post<ClubInterface>(this.url, club);
