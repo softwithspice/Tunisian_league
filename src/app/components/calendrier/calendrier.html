@@ -1,0 +1,37 @@
+<div class="page">
+  <nav class="navbar" aria-label="Navigation principale">
+    <img src="TunisianLeague Pitch.png" alt="">
+    <a class="logo" routerLink="/">TunisianLeague</a>
+    <a class="retour" routerLink="/">← Accueil</a>
+  </nav>
+  <main class="contenu">
+    <header class="entete"><h1>Calendrier des matchs</h1><p>Retrouvez les rencontres de votre championnat.</p></header>
+    <div class="filtre">
+      <label for="championnat">Championnat</label>
+      <select id="championnat" [(ngModel)]="championnatId" (ngModelChange)="choisir()">
+        <option [ngValue]="0">Choisir un championnat</option>
+        @for (c of championnats; track c.id) { <option [ngValue]="c.id">{{ c.nom }} — {{ c.saison }}</option> }
+      </select>
+    </div>
+    @if (loading) { <p class="etat" role="status">Chargement…</p> }
+    @if (erreur) { <p class="etat erreur" role="alert">{{ erreur }}</p> }
+    @if (!loading && !erreur && championnats.length === 0) { <p class="etat">Aucun championnat disponible.</p> }
+    @if (!loading && !erreur && championnatId && groupes.length === 0) { <p class="etat">Aucun match prévu pour ce championnat.</p> }
+    @if (!loading && !erreur && championnats.length && !championnatId) { <p class="etat">Sélectionnez un championnat pour consulter ses matchs.</p> }
+    @for (g of groupes; track g.journee) {
+      <section class="journee">
+        <h2>Journée {{ g.journee }}</h2>
+        <ul>@for (m of g.matches; track $index) {
+          <li><span class="equipes">{{ m.clubDomicileNom ?? ('Club #' + m.clubDomicileId) }} — {{ m.clubExterieurNom ?? ('Club #' + m.clubExterieurId) }}</span><time class="date" [attr.datetime]="m.dateMatch">{{ m.dateMatch | date:'dd/MM/yyyy HH:mm' }}</time></li>
+        }</ul>
+      </section>
+    }
+    @if (championnatId && (page > 0 || hasNext)) {
+      <nav class="pagination" aria-label="Pages du calendrier">
+        <button type="button" (click)="choisir(page - 1)" [disabled]="loading || page === 0">← Précédent</button>
+        <span>Page {{ page + 1 }}</span>
+        <button type="button" (click)="choisir(page + 1)" [disabled]="loading || !hasNext">Suivant →</button>
+      </nav>
+    }
+  </main>
+</div>
