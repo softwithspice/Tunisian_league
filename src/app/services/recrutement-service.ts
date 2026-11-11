@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../api-config';
 
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +10,7 @@ import { DemandeRecrutementInterface } from '../interfaces/Demande_recrutement';
 export class RecrutementService {
 
   private http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080';
+  private readonly apiUrl = `${API_BASE_URL}`;
   private readonly urlDemandes = `${this.apiUrl}/recrutement`;
 
   // Récupérer les joueurs disponibles pour le responsable
