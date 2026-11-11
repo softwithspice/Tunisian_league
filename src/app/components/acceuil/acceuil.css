@@ -29,6 +29,8 @@
   background: #2ca83f;
   color: white;
 }
+.calendar-link { padding: 11px 14px; color: #208431; font-weight: bold; text-decoration: none; }
+.calendar-link:hover { text-decoration: underline; }
 footer {
   padding: 20px;
   text-align: center;
@@ -62,6 +64,7 @@ footer {
 @media (max-width: 480px) {
   .navbar {
     padding: 20px;
+    flex-wrap: wrap;
   }
 
   
