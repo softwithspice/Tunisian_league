@@ -1,0 +1,28 @@
+<div class="form-page">
+  <div class="form-card">
+    <h2>Saisir une journée</h2>
+    <p class="intro">Sélectionnez un championnat et ajoutez les rencontres de la journée.</p>
+    @if (loading) { <p class="message" role="status">Chargement des championnats et des clubs…</p> }
+    @if (message) { <p class="message" role="status">{{ message }}</p> }
+    <form (ngSubmit)="enregistrer()">
+      <div class="row">
+        <label>Championnat <select name="championnat" [(ngModel)]="championnatId" (ngModelChange)="changerChampionnat()" [disabled]="loading || saving"><option [ngValue]="0">Choisir un championnat</option>@for (c of championnats; track c.id) { <option [ngValue]="c.id">{{ c.nom }} — {{ c.saison }}</option> }</select></label>
+        <label>Numéro de journée <input name="journee" type="number" min="1" step="1" [(ngModel)]="journee" [disabled]="saving"></label>
+      </div>
+      @for (m of matches; track $index; let i = $index) {
+        <fieldset [disabled]="saving"><legend>Match {{ i + 1 }}</legend>
+          <div class="row">
+            <label>Club à domicile <select [name]="'domicile' + i" [(ngModel)]="m.domicile"><option [ngValue]="0">Choisir</option>@for (c of clubs; track c.id) { <option [ngValue]="c.id">{{ c.nom }}</option> }</select></label>
+            <label>Club à l’extérieur <select [name]="'exterieur' + i" [(ngModel)]="m.exterieur"><option [ngValue]="0">Choisir</option>@for (c of clubs; track c.id) { <option [ngValue]="c.id">{{ c.nom }}</option> }</select></label>
+          </div>
+          <label>Date et heure <input type="datetime-local" [name]="'date' + i" [(ngModel)]="m.date"></label>
+          <button class="remove" type="button" (click)="matches.splice(i, 1)">Supprimer ce match</button>
+        </fieldset>
+      }
+      <div class="actions">
+        <button class="secondary" type="button" (click)="ajouter()" [disabled]="saving">+ Ajouter un match</button>
+        <button class="primary" type="submit" [disabled]="loading || saving">{{ saving ? 'Enregistrement…' : 'Enregistrer la journée' }}</button>
+      </div>
+    </form>
+  </div>
+</div>
