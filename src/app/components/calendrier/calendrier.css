@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+.page { min-height: 100vh; background: #f5f9f5; color: #1e293b; font-family: Arial, sans-serif; }
+.navbar { display: flex; align-items: center; gap: 10px; padding: 15px 8%; background: white; }
+.navbar img { width: 100px; height: 60px; object-fit: contain; }
+.logo { margin-right: auto; color: #2ca83f; font-size: 23px; font-weight: bold; text-decoration: none; }
+.retour { padding: 10px 18px; border: 1px solid #2ca83f; border-radius: 8px; color: #208431; font-weight: bold; text-decoration: none; }
+.retour:hover { background: #2ca83f; color: white; }
+.contenu { max-width: 1000px; margin: 0 auto; padding: 40px 8%; }
+.entete h1 { margin: 0; color: #173d25; font-size: 28px; }
+.entete p { margin: 8px 0 28px; color: #647568; }
+.filtre { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }
+.filtre label { color: #173d25; font-size: 14px; font-weight: bold; }
+select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; color: #1e293b; font: inherit; }
+select:focus-visible, a:focus-visible { outline: 2px solid #208431; outline-offset: 2px; }
+.etat { margin-top: 25px; color: #647568; }
+.erreur { color: #b91c1c; }
+.journee { margin-top: 24px; overflow: hidden; border: 1px solid #e0ebe1; border-top: 4px solid #2ca83f; border-radius: 12px; background: white; }
+.journee h2 { margin: 0; padding: 18px 22px; color: #173d25; font-size: 18px; }
+.journee ul { margin: 0; padding: 0; list-style: none; }
+.journee li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding: 16px 22px; border-top: 1px solid #e0ebe1; }
+.equipes { color: #173d25; font-weight: bold; overflow-wrap: anywhere; }
+.date { color: #647568; font-size: 14px; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; color: #173d25; }
+.pagination button { padding: 10px 14px; border: 1px solid #2ca83f; border-radius: 8px; background: white; color: #208431; font: inherit; cursor: pointer; }
+.pagination button:disabled { opacity: .5; cursor: not-allowed; }
+.pagination button:focus-visible { outline: 2px solid #208431; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .navbar, .contenu { padding: 18px 16px; }
+  .navbar img { width: 60px; }
+  .logo { font-size: 19px; }
+  .retour { padding: 9px 12px; }
+}
