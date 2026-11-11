@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../api-config';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ export class SanctionService {
   private readonly http = inject(HttpClient);
 
 
-  private readonly url = 'http://localhost:8080/sanction';
+  private readonly url = `${API_BASE_URL}/sanction`;
 
   addSanction(sanction: SanctionInterface): Observable<SanctionInterface> {
     return this.http.post<SanctionInterface>(this.url, sanction);
