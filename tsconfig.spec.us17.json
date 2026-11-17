@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.spec.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec-us17"
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/services/championnat-service.spec.ts",
+    "src/app/components/resultats/resultats.spec.ts"
+  ]
+}

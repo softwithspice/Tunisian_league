@@ -5,8 +5,10 @@ import { Acceuil } from './components/acceuil/acceuil';
 
 import { ClubJoueurs } from './components/club-joueurs/club-joueurs';
 import { Calendrier } from './components/calendrier/calendrier';
+import { Resultats } from './components/resultats/resultats';
 export const routes: Routes = [
     { path: 'calendrier', component: Calendrier },
+    { path: 'resultats', component: Resultats },
     {
         path:"",component:Acceuil
     },

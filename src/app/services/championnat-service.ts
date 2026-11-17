@@ -23,4 +23,11 @@ export class ChampionnatService {
     return this.http.get<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }>(`${this.url}/${id}/matches`, { params: { page, size: 20 } });
   }
   saisirJournee(matches: Match[]): Observable<void> { return this.http.post<void>(`${API_BASE_URL}/journees`, matches); }
+
+  getResults(id: number, page: number): Observable<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }> {
+  return this.http.get<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }>(
+    `${this.url}/${id}/results`,
+    { params: { page, size: 20 } }
+  );
+}
 }

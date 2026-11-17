@@ -5,4 +5,6 @@ export interface CalendarMatch {
   clubDomicileNom: string | null;
   clubExterieurNom: string | null;
   dateMatch: string;
+  butsDomicile: number | null;
+  butsExterieur: number | null;
 }
