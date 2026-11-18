@@ -1,0 +1,43 @@
+<div class="container">
+
+  <h2>Déposer une réserve</h2>
+
+  <form (ngSubmit)="deposerReserve()">
+
+    <label>Choisir un match</label>
+
+    <select [(ngModel)]="matchId" name="matchId" required>
+      <option [ngValue]="null">Sélectionner un match</option>
+
+      @for (match of matches(); track match.id) {
+        <option [ngValue]="match.id">
+          {{ match.clubDomicileNom }} -
+          {{ match.clubExterieurNom }}
+          (Journée {{ match.journee }})
+        </option>
+      }
+    </select>
+
+    <label>Motif de la réserve</label>
+
+    <textarea
+      [(ngModel)]="motif"
+      name="motif"
+      placeholder="Saisir le motif de la réserve"
+      maxlength="2000"
+      required>
+    </textarea>
+
+    <button type="submit">Déposer la réserve</button>
+
+  </form>
+
+  @if (message()) {
+    <p class="success">{{ message() }}</p>
+  }
+
+  @if (erreur()) {
+    <p class="error">{{ erreur() }}</p>
+  }
+
+</div>
