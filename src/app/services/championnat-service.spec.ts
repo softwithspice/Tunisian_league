@@ -34,6 +34,22 @@ describe('ChampionnatService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('loads matchdays for a championship', () => {
+    service.getMatchdays(7).subscribe(days => expect(days).toEqual([1, 2]));
+
+    const req = httpMock.expectOne(`${API_BASE_URL}/championnats/7/journees`);
+    expect(req.request.method).toBe('GET');
+    req.flush([1, 2]);
+  });
+
+  it('filters matches by matchday while preserving pagination', () => {
+    service.getMatches(7, 1, 3).subscribe(page => expect(page.content).toEqual([]));
+
+    const req = httpMock.expectOne(`${API_BASE_URL}/championnats/7/matches?page=1&size=20&journee=3`);
+    expect(req.request.method).toBe('GET');
+    req.flush({ content: [], page: 1, size: 20, hasNext: false });
+  });
+
   it('should retrieve match results', () => {
 
     const response = {

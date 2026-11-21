@@ -1,4 +1,5 @@
 export interface CalendarMatch {
+  id: number;
   journee: number;
   clubDomicileId: number;
   clubExterieurId: number;
