@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { DashboardAdmin } from './dashboard-admin';
 
@@ -8,7 +9,8 @@ describe('DashboardAdmin', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardAdmin]
+      imports: [DashboardAdmin],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 
@@ -17,7 +19,9 @@ describe('DashboardAdmin', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('links to result entry', () => {
     expect(component).toBeTruthy();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('a[href="/admin/resultats"]')).not.toBeNull();
   });
 });
