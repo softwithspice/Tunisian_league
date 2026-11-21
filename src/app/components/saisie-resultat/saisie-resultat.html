@@ -1,0 +1,114 @@
+<div class="result-page">
+  <section class="card">
+    <h2>Saisir un résultat</h2>
+    <p class="intro">Choisissez un match terminé, saisissez son score et ses événements, puis enregistrez le tout.</p>
+
+    @if (error) { <p class="message error" role="alert">{{ error }}</p> }
+    @if (notice) { <p class="message success" role="status">{{ notice }}</p> }
+
+    <div class="selection">
+      <label>Championnat
+        <select name="championnat" [(ngModel)]="championnatId" (ngModelChange)="changerChampionnat()" [disabled]="loadingChampionnats || saving">
+          <option [ngValue]="0">Choisir un championnat</option>
+          @for (championnat of championnats; track championnat.id) {
+            <option [ngValue]="championnat.id">{{ championnat.nom }} — {{ championnat.saison }}</option>
+          }
+        </select>
+      </label>
+      <label>Journée
+        <select name="journee" [(ngModel)]="journee" (ngModelChange)="changerJournee()" [disabled]="!championnatId || loadingJournees || saving">
+          <option [ngValue]="0">Choisir une journée</option>
+          @for (day of journees; track day) { <option [ngValue]="day">Journée {{ day }}</option> }
+        </select>
+      </label>
+      <label>Match
+        <select name="match" [(ngModel)]="matchId" (ngModelChange)="changerMatch()" [disabled]="!journee || loadingMatches || saving">
+          <option [ngValue]="0">Choisir un match</option>
+          @for (match of matches; track match.id) {
+            <option [ngValue]="match.id">{{ match.clubDomicileNom || 'Club #' + match.clubDomicileId }} — {{ match.clubExterieurNom || 'Club #' + match.clubExterieurId }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    @if (loadingChampionnats || loadingJournees || loadingMatches || loadingDetails) {
+      <p class="message" role="status">Chargement…</p>
+    }
+    @if (journee && !loadingMatches) {
+      @if (matches.length === 0) { <p class="message">Aucun match pour cette journée.</p> }
+      <div class="pagination">
+        <button type="button" class="secondary" (click)="chargerMatches(page - 1)" [disabled]="page === 0 || saving || loadingMatches">Précédent</button>
+        <span>Page {{ page + 1 }}</span>
+        <button type="button" class="secondary" (click)="chargerMatches(page + 1)" [disabled]="!hasNext || saving || loadingMatches">Suivant</button>
+      </div>
+    }
+  </section>
+
+  @if (details) {
+    <section class="card">
+      <h3>{{ details.clubDomicileNom || 'Club domicile' }} — {{ details.clubExterieurNom || 'Club extérieur' }}</h3>
+      <p class="intro">Journée {{ details.journee }} · {{ details.dateMatch || 'Date à préciser' }}</p>
+
+      <form (ngSubmit)="enregistrer()">
+        <fieldset [disabled]="!playersReady || loadingDetails || saving">
+          <legend>Score final</legend>
+          <div class="score">
+            <label>{{ details.clubDomicileNom || 'Domicile' }}
+              <input name="butsDomicile" type="number" min="0" step="1" required [(ngModel)]="butsDomicile">
+            </label>
+            <span>—</span>
+            <label>{{ details.clubExterieurNom || 'Extérieur' }}
+              <input name="butsExterieur" type="number" min="0" step="1" required [(ngModel)]="butsExterieur">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset [disabled]="!playersReady || loadingDetails || saving">
+          <legend>Événements du match</legend>
+          <p class="hint">La liste envoyée remplace tous les événements enregistrés. Les buts, y compris les buts contre son camp, doivent correspondre au score.</p>
+          @for (event of evenements; track event; let i = $index) {
+            <div class="event-row">
+              <h4>Événement {{ i + 1 }}</h4>
+              <div class="event-grid">
+                <label>Type
+                  <select [name]="'type' + i" [(ngModel)]="event.type" (ngModelChange)="changerType(event)">
+                    @for (option of eventTypes; track option.value) { <option [ngValue]="option.value">{{ option.label }}</option> }
+                  </select>
+                </label>
+                <label>Minute
+                  <input [name]="'minute' + i" type="number" min="0" step="1" required [(ngModel)]="event.minute">
+                </label>
+                <label>Club
+                  <select [name]="'club' + i" [(ngModel)]="event.clubId" (ngModelChange)="changerClub(event)">
+                    <option [ngValue]="details.clubDomicileId">{{ details.clubDomicileNom || 'Domicile' }}</option>
+                    <option [ngValue]="details.clubExterieurId">{{ details.clubExterieurNom || 'Extérieur' }}</option>
+                  </select>
+                </label>
+                <label>Joueur
+                  <select [name]="'joueur' + i" [(ngModel)]="event.joueurId" required>
+                    <option [ngValue]="0">Choisir un joueur</option>
+                    @for (player of joueursDuClub(event.clubId); track player.id) { <option [ngValue]="player.id">{{ player.label }}</option> }
+                  </select>
+                </label>
+                @if (event.type === 'BUT') {
+                  <label>Passeur (facultatif)
+                    <select [name]="'passeur' + i" [(ngModel)]="event.passeurId">
+                      <option [ngValue]="null">Aucun</option>
+                      @for (player of joueursDuClub(event.clubId); track player.id) { <option [ngValue]="player.id">{{ player.label }}</option> }
+                    </select>
+                  </label>
+                }
+              </div>
+              <button type="button" class="remove" (click)="evenements.splice(i, 1)">Supprimer cet événement</button>
+            </div>
+          }
+          <button type="button" class="secondary" (click)="ajouterEvenement()" [disabled]="!playersReady || loadingDetails">+ Ajouter un événement</button>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="primary" [disabled]="!playersReady || loadingDetails || saving">{{ saving ? 'Enregistrement…' : 'Enregistrer le résultat' }}</button>
+        </div>
+      </form>
+    </section>
+  }
+</div>
