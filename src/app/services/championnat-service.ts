@@ -19,8 +19,13 @@ export class ChampionnatService {
   }
 
   getChampionnats(): Observable<ChampionnatInterface[]> { return this.http.get<ChampionnatInterface[]>(this.url); }
-  getMatches(id: number, page: number): Observable<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }> {
-    return this.http.get<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }>(`${this.url}/${id}/matches`, { params: { page, size: 20 } });
+  getMatchdays(id: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.url}/${id}/journees`);
+  }
+  getMatches(id: number, page: number, journee?: number): Observable<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }> {
+    const params: Record<string, number> = { page, size: 20 };
+    if (journee !== undefined) params['journee'] = journee;
+    return this.http.get<{ content: CalendarMatch[]; page: number; size: number; hasNext: boolean }>(`${this.url}/${id}/matches`, { params });
   }
   saisirJournee(matches: Match[]): Observable<void> { return this.http.post<void>(`${API_BASE_URL}/journees`, matches); }
 

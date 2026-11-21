@@ -20,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'admin', loadComponent: () => import('./components/dashboard-admin/dashboard-admin').then(m => m.DashboardAdmin), children: [
       { path: 'journees', loadComponent: () => import('./components/journee/journee').then(m => m.Journee) },
+      { path: 'resultats', loadComponent: () => import('./components/saisie-resultat/saisie-resultat').then(m => m.SaisieResultat) },
       {
         path: 'clubs',
         loadComponent: () => import('./components/ajouter-club/ajouter-club').then(m => m.AjouterClub)
