@@ -29,5 +29,6 @@ describe('DashboardResponsable', () => {
   it('shows the connected manager’s club', () => {
     expect(component).toBeTruthy();
     expect(component.nomClub()).toBe('Club Test');
+    expect(fixture.nativeElement.querySelector('a[href="/responsable/statistiques"]')).not.toBeNull();
   });
 });
