@@ -30,5 +30,6 @@ describe('Acceuil', () => {
     expect(component).toBeTruthy();
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Club Test');
+    expect(fixture.nativeElement.querySelector('a[href="/statistiques"]')).not.toBeNull();
   });
 });

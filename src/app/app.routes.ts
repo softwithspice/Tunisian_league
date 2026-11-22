@@ -9,6 +9,7 @@ import { Resultats } from './components/resultats/resultats';
 export const routes: Routes = [
   { path: 'calendrier', component: Calendrier },
   { path: 'resultats', component: Resultats },
+  { path: 'statistiques', title: 'Meilleurs buteurs et passeurs', loadComponent: () => import('./components/player-leaders/player-leaders').then(m => m.PlayerLeaders) },
   {
     path: "", component: Acceuil
   },
@@ -51,6 +52,7 @@ export const routes: Routes = [
   },
   {
     path: 'responsable', loadComponent: () => import('./components/dashboard-responsable/dashboard-responsable').then(m => m.DashboardResponsable), children: [
+      { path: 'statistiques', title: 'Meilleurs buteurs et passeurs', loadComponent: () => import('./components/player-leaders/player-leaders').then(m => m.PlayerLeaders) },
       {
         path: 'recrutement',
         loadComponent: () => import('./components/demande-recrutement/demande-recrutement').then(m => m.DemandeRecrutement)
