@@ -1,0 +1,90 @@
+<div class="leader-page" [class.embedded]="insideManager">
+  @if (!insideManager) {
+    <nav class="public-nav" aria-label="Navigation principale">
+      <a class="brand" routerLink="/">TunisianLeague</a>
+      <a routerLink="/calendrier">Calendrier</a>
+      <a routerLink="/resultats">Résultats</a>
+      <a routerLink="/">Accueil</a>
+    </nav>
+  }
+
+  <main class="content">
+    <header>
+      <h1>Meilleurs buteurs et passeurs</h1>
+      <p>Suivez les performances individuelles dans chaque championnat.</p>
+    </header>
+
+    <div class="filters">
+      <label for="championnat">Championnat</label>
+      <div class="filter-row">
+        <select id="championnat" name="championnat" [(ngModel)]="championnatId"
+                (ngModelChange)="choisirChampionnat()" [disabled]="loadingChampionnats">
+          <option [ngValue]="0">Choisir un championnat</option>
+          @for (championnat of championnats; track championnat.id) {
+            <option [ngValue]="championnat.id">{{ championnat.nom }} — {{ championnat.saison }}</option>
+          }
+        </select>
+        <button type="button" (click)="choisirChampionnat()"
+                [disabled]="!championnatId || loadingStatistics">Rafraîchir</button>
+      </div>
+    </div>
+
+    @if (loadingChampionnats || loadingStatistics) {
+      <p class="status" role="status">Chargement…</p>
+    }
+    @if (error) { <p class="status error" role="alert">{{ error }}</p> }
+    @if (!loadingChampionnats && championnats.length === 0 && !error) {
+      <p class="status">Aucun championnat disponible.</p>
+    }
+    @if (!championnatId && championnats.length > 0) {
+      <p class="status">Sélectionnez un championnat pour voir les classements des joueurs.</p>
+    }
+
+    @if (loadedStatistics && !error) {
+      <div class="leaderboards">
+        <section class="board" aria-labelledby="scorers-title">
+          <h2 id="scorers-title">Meilleurs buteurs</h2>
+          @if (scorers.length === 0) {
+            <p class="empty">Aucun but enregistré pour ce championnat.</p>
+          } @else {
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rang</th><th scope="col">Joueur</th><th scope="col">Club(s)</th><th scope="col">Buts</th></tr></thead>
+                <tbody>
+                  @for (player of visibleScorers; track player.playerId) {
+                    <tr><td>{{ player.rank }}</td><td>{{ player.name }}</td><td>{{ player.clubs.join(', ') }}</td><td class="total">{{ player.goals }}</td></tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            @if (visibleScorers.length < scorers.length) {
+              <button type="button" class="show-all" (click)="showAllScorers = true">Voir tous les buteurs</button>
+            }
+          }
+        </section>
+
+        <section class="board" aria-labelledby="assists-title">
+          <h2 id="assists-title">Meilleurs passeurs</h2>
+          @if (assistProviders.length === 0) {
+            <p class="empty">Aucune passe décisive enregistrée pour ce championnat.</p>
+          } @else {
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Rang</th><th scope="col">Joueur</th><th scope="col">Club(s)</th><th scope="col">Passes</th></tr></thead>
+                <tbody>
+                  @for (player of visibleAssistProviders; track player.playerId) {
+                    <tr><td>{{ player.rank }}</td><td>{{ player.name }}</td><td>{{ player.clubs.join(', ') }}</td><td class="total">{{ player.assists }}</td></tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+            @if (visibleAssistProviders.length < assistProviders.length) {
+              <button type="button" class="show-all" (click)="showAllAssistProviders = true">Voir tous les passeurs</button>
+            }
+          }
+        </section>
+      </div>
+      <p class="update-note">Les statistiques peuvent prendre quelques instants à se mettre à jour après la saisie d'un résultat.</p>
+    }
+  </main>
+</div>
